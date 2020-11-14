@@ -20,7 +20,7 @@
             <form method="post">
                 <input type="text" name="username" placeholder="Όνομα Χρήστη">
                 <input type="password" name="password" placeholder="Κωδικός">
-                <a href="./ADISE20_ARSEN4L/register.php"><input type="submit" name="register" value="Εγγραφή"></a>   
+                <a href="./register.php"><input type="button" name="register" value="Εγγραφή"></a>   
                 <input type="submit" name="login" value="Σύνδεση">                               
             </form>
         </div>

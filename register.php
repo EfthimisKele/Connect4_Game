@@ -27,6 +27,7 @@
                 <input type="text" name="surname" placeholder="Επίθετο">
                 <input type="text" name="faculty" placeholder="Σχολή">               
                 <input type="submit" name="register" value="Εγγραφή" >
+                <a href="./login.php"><input type="button" name="return" value="Επιστροφή στην Αρχική"></a>
             </form>
         </div>
     </div>

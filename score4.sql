@@ -91,9 +91,9 @@ CREATE TABLE `users` (
   `username` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
-  `name` varchar(100) DEFAULT NULL,
-  `surname` varchar(100) DEFAULT NULL,
-  `study` varchar(100) DEFAULT NULL
+  `name` varchar(100) NOT NULL,
+  `surname` varchar(100) NOT NULL,
+  `study` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 COMMIT;
 

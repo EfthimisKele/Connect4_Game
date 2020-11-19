@@ -66,7 +66,8 @@
             //problem
             header('Location: index.php'); 
             $_SESSION['username'] = $username; 
-           echo "<script type='text/javascript'> document.location = 'index.php'; </script>";                   
+            print json_encode(array('success'=>'ok'));
+           // echo "<script type='text/javascript'> document.location = 'index.php'; </script>";                   
         } else {
             echo 'Λάθος username ή κωδικός πρόσβασης';
         }

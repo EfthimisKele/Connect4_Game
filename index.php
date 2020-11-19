@@ -7,14 +7,69 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Σκορ 4</title>
-    <link rel="stylesheet" href="css/index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+<style>
+
+ 
+</style>    
 </head>
 <body>
-    <?php
-    echo "HELLLLO";
+
+<div id="game">
+    <table >
+        <tbody>
+            <tr onclick="">
+                <td >1</td>
+                <td >2</td>
+                <td >3</td>
+                <td >4</td>
+                <td >5</td>
+                <td >6</td>
+            </tr>
+            <tr >
+                <td >1.1</td>
+                <td ></td>
+                <td ></td>
+                <td ></td>
+                <td ></td>
+                <td ></td>
+              </tr>
+              <tr >
+                 <td >1.3</td><td ></td>
+                <td ></td>
+                <td ></td>
+                <td ></td>
+                <td ></td>
+              </tr>
+              <tr >
+              <td >1.4</td><td ></td>
+                <td ></td>
+                <td ></td>
+                <td ></td>
+                <td ></td>
+              </tr>
+              <tr >
+              <td ></td><td ></td>
+                <td ></td>
+                <td ></td>
+                <td ></td>
+                <td ></td>
+              </tr>
+              <tr >
+              <td ></td><td ></td>
+                <td ></td>
+                <td ></td>
+                <td ></td>
+                <td ></td>
+              </tr>
+            </tbody>
+          </table>
 
 
-    ?>
-    
+</div>
+
+
+   
 </body>
 </html>

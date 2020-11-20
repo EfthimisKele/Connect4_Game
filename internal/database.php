@@ -55,7 +55,7 @@
 
         $conn = dbconnect();
 
-        $stmt = $conn->prepare("SELECT username FROM users WHERE username=?");
+        $stmt = $conn->prepare("SELECT username,password FROM users WHERE username=?");
         $stmt->bind_param("s", $username);
 
         $username = mysqli_real_escape_string($conn, $_POST['username']);
@@ -63,11 +63,9 @@
         $stmt->execute();
         $result = mysqli_fetch_assoc($stmt->get_result());
         if($result && password_verify($_POST['password'], $result['password'])) {
-            //problem
+            setcookie('username', $username, $expire = 0, "/");
             header('Location: index.php'); 
-            $_SESSION['username'] = $username; 
-            print json_encode(array('success'=>'ok'));
-           // echo "<script type='text/javascript'> document.location = 'index.php'; </script>";                   
+            print json_encode(array('success'=>'ok'));                   
         } else {
             echo 'Λάθος username ή κωδικός πρόσβασης';
         }

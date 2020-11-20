@@ -10,11 +10,38 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/index.css">
 <style>
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    background-color: lightgoldenrodyellow;
+    font-family: 'Roboto', sans-serif;
+}
+
+.container{
+  display: flex;
+  justify-content: center;
+}
+
+.sidebar{
+  display: flex;
+    position:absolute;
+    top:10px;
+    left: 10px;
+    width:400px;
+    height:200px;
+}
+
+
 #game {
+  display: flex;
   position: absolute;
   top: 35%;
   left: 45%;
   margin: -100px 0 0 -150px;
+  border: 3px solid red;
+  background-color: blue;
+  border-radius: 15px;
 }
 th, td { 
     padding: 8px;
@@ -46,11 +73,15 @@ table {
 </style>    
 </head>
 <body>
+<?php
+  echo $_COOKIE['username'];
+?>
+<div class='container'>
 
-<div id="game">
+  <div id="game">
     <table >
         <tbody>
-            <tr onclick="">
+            <tr>
                 <td >1.1</td>
                 <td >1.2</td>
                 <td >1.3</td>
@@ -96,10 +127,8 @@ table {
               </tr>
             </tbody>
           </table>
-
-
+  </div>
 </div>
-
 
    
 </body>

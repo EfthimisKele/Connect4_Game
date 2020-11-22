@@ -1,4 +1,5 @@
 <?php
+
     require 'internal/database.php';
 ?>
 <!DOCTYPE html>
@@ -9,6 +10,7 @@
     <title>Σκορ 4</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/index.css">
+    <script type="text/javascript" src="js/create.js"></script>
 <style>
 html, body {
     width: 100%;
@@ -23,26 +25,28 @@ html, body {
   justify-content: center;
 }
 
-.sidebar{
-  display: flex;
-    position:absolute;
-    top:10px;
-    left: 10px;
-    width:400px;
-    height:200px;
+#header{
+  height:80px;
+  line-height:80px;
+  margin:0;
+  padding-left:10px;
 }
-
 
 #game {
   display: flex;
   position: absolute;
   top: 35%;
   left: 45%;
-  margin: -100px 0 0 -150px;
+  margin: -80px 0 0 -200px;
   border: 3px solid red;
   background-color: blue;
   border-radius: 15px;
 }
+
+.sign_out{
+  margin: 70px;
+}
+
 th, td { 
     padding: 8px;
     background: #E8ECE0;
@@ -72,12 +76,20 @@ table {
  
 </style>    
 </head>
-<body>
-<?php
-  echo $_COOKIE['username'];
-?>
-<div class='container'>
 
+<body>
+<div class='container'>
+  <div id="header">
+  <?php
+  echo "Καλως όρισες ξανά ".$_COOKIE['username']." !";
+
+  if(isset($_SESSION['username'])) {
+    echo '<a href="logout.php">' .
+        '<i class="sign_out"></i>' .  
+        'Αποσύνδεση</a>';
+} 
+  ?>
+  </div>
   <div id="game">
     <table >
         <tbody>
@@ -88,6 +100,7 @@ table {
                 <td >1.4</td>
                 <td >1.5</td>
                 <td >1.6</td>
+                <td >1.7</td>
             </tr>
             <tr >
                 <td >2.1</td>
@@ -96,34 +109,43 @@ table {
                 <td ></td>
                 <td ></td>
                 <td ></td>
-              </tr>
-              <tr >
-                 <td >3</td><td ></td>
-                <td ></td>
-                <td ></td>
-                <td ></td>
                 <td ></td>
               </tr>
               <tr >
-              <td >4</td><td ></td>
+                 <td >3.1</td>
+                 <td ></td>
+                <td >3.3</td>
                 <td ></td>
                 <td ></td>
                 <td ></td>
                 <td ></td>
               </tr>
               <tr >
-              <td ></td><td ></td>
+                <td >4.1</td>
                 <td ></td>
+                <td ></td>
+                <td >4.4</td>
                 <td ></td>
                 <td ></td>
                 <td ></td>
               </tr>
               <tr >
-              <td ></td><td ></td>
+                <td >5.1</td>
+                <td ></td>
+                <td ></td>
+                <td ></td>
+                <td >5.5</td>
+                <td ></td>
+                <td ></td>
+              </tr>
+              <tr >
+                <td >6.1</td>
                 <td ></td>
                 <td ></td>
                 <td ></td>
                 <td ></td>
+                <td >6.6</td>
+                <td >6.7</td>
               </tr>
             </tbody>
           </table>

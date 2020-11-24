@@ -30,7 +30,8 @@
         //save all input values from form
 
         
-
+        //save the value of every field
+        //hash the password
         $username = mysqli_real_escape_string($conn, $_POST['username']);
         $pass = password_hash($_POST['password'], PASSWORD_DEFAULT);
         $email = mysqli_real_escape_string($conn, $_POST['email']);

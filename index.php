@@ -10,6 +10,12 @@
     <title>Σκορ 4</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/index.css">
+    <script
+			  src="https://code.jquery.com/jquery-3.5.1.min.js"
+			  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+			  crossorigin="anonymous">
+                  
+              </script>
     <script type="text/javascript" src="js/create.js"></script>
 <style>
 html, body {
@@ -43,20 +49,24 @@ html, body {
   border-radius: 15px;
 }
 
+#names{
+  position: fixed;
+  left:0;
+  top:50%;
+  margin-top: 50%;
+}
+
 .sign_out{
   margin: 70px;
 }
 
-th, td { 
+td.score_circle { 
     padding: 8px;
     background: #E8ECE0;
     text-align: center;
     border: 1px solid #444;
     border-bottom-width: 0px;
     cursor:  pointer;
-}
-
-td {
     height: 60px;
     width: 70px;
     border-top-right-radius: 100px;
@@ -77,7 +87,7 @@ table {
 </style>    
 </head>
 
-<body>
+<body onload="draw_board()">
 <div class='container'>
   <div id="header">
   <?php
@@ -90,65 +100,11 @@ table {
 } 
   ?>
   </div>
-  <div id="game">
-    <table >
-        <tbody>
-            <tr>
-                <td >1.1</td>
-                <td >1.2</td>
-                <td >1.3</td>
-                <td >1.4</td>
-                <td >1.5</td>
-                <td >1.6</td>
-                <td >1.7</td>
-            </tr>
-            <tr >
-                <td >2.1</td>
-                <td >2.2</td>
-                <td ></td>
-                <td ></td>
-                <td ></td>
-                <td ></td>
-                <td ></td>
-              </tr>
-              <tr >
-                 <td >3.1</td>
-                 <td ></td>
-                <td >3.3</td>
-                <td ></td>
-                <td ></td>
-                <td ></td>
-                <td ></td>
-              </tr>
-              <tr >
-                <td >4.1</td>
-                <td ></td>
-                <td ></td>
-                <td >4.4</td>
-                <td ></td>
-                <td ></td>
-                <td ></td>
-              </tr>
-              <tr >
-                <td >5.1</td>
-                <td ></td>
-                <td ></td>
-                <td ></td>
-                <td >5.5</td>
-                <td ></td>
-                <td ></td>
-              </tr>
-              <tr >
-                <td >6.1</td>
-                <td ></td>
-                <td ></td>
-                <td ></td>
-                <td ></td>
-                <td >6.6</td>
-                <td >6.7</td>
-              </tr>
-            </tbody>
-          </table>
+  <div id=names>
+    <h1>YOLOOO</h1><br>
+    <h2>DF</h2>
+  </div>
+  <div id="game">  
   </div>
 </div>
 

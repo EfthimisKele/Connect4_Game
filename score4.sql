@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Φιλοξενητής: 127.0.0.1
--- Χρόνος δημιουργίας: 14 Νοε 2020 στις 19:24:14
+-- Χρόνος δημιουργίας: 24 Νοε 2020 στις 10:47:31
 -- Έκδοση διακομιστή: 10.4.11-MariaDB
 -- Έκδοση PHP: 7.4.5
 
@@ -20,6 +20,16 @@ SET time_zone = "+00:00";
 --
 -- Βάση δεδομένων: `score4`
 --
+
+DELIMITER $$
+--
+-- Διαδικασίες
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `clean_board` ()  BEGIN 
+	 REPLACE INTO board SELECT * FROM board_empty;
+END$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -84,6 +94,100 @@ INSERT INTO `board` (`x`, `y`, `color`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Δομή πίνακα για τον πίνακα `board_empty`
+--
+
+CREATE TABLE `board_empty` (
+  `x` int(11) NOT NULL,
+  `y` int(11) NOT NULL,
+  `color` enum('R','Y') DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Άδειασμα δεδομένων του πίνακα `board_empty`
+--
+
+INSERT INTO `board_empty` (`x`, `y`, `color`) VALUES
+(1, 1, NULL),
+(1, 2, NULL),
+(1, 3, NULL),
+(1, 4, NULL),
+(1, 5, NULL),
+(1, 6, NULL),
+(1, 7, NULL),
+(2, 1, NULL),
+(2, 2, NULL),
+(2, 3, NULL),
+(2, 4, NULL),
+(2, 5, NULL),
+(2, 6, NULL),
+(2, 7, NULL),
+(3, 1, NULL),
+(3, 2, NULL),
+(3, 3, NULL),
+(3, 4, NULL),
+(3, 5, NULL),
+(3, 6, NULL),
+(3, 7, NULL),
+(4, 1, NULL),
+(4, 2, NULL),
+(4, 3, NULL),
+(4, 4, NULL),
+(4, 5, NULL),
+(4, 6, NULL),
+(4, 7, NULL),
+(5, 1, NULL),
+(5, 2, NULL),
+(5, 3, NULL),
+(5, 4, NULL),
+(5, 5, NULL),
+(5, 6, NULL),
+(5, 7, NULL),
+(6, 1, NULL),
+(6, 2, NULL),
+(6, 3, NULL),
+(6, 4, NULL),
+(6, 5, NULL),
+(6, 6, NULL),
+(6, 7, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `game_status`
+--
+
+CREATE TABLE `game_status` (
+  `status` enum('not active','initialized','started','ended','aborded') NOT NULL DEFAULT 'not active',
+  `p_turn` enum('R','Y') DEFAULT NULL,
+  `result` enum('R','Y','D') DEFAULT NULL,
+  `last_change` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Δείκτες `game_status`
+--
+DELIMITER $$
+CREATE TRIGGER `game_status_update` BEFORE UPDATE ON `game_status` FOR EACH ROW BEGIN 
+   		 SET NEW.last_change = NOW();
+  END
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `players`
+--
+
+CREATE TABLE `players` (
+  `username` varchar(20) DEFAULT NULL,
+  `color` enum('R','Y') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Δομή πίνακα για τον πίνακα `users`
 --
 
@@ -95,6 +199,36 @@ CREATE TABLE `users` (
   `surname` varchar(100) NOT NULL,
   `study` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Άδειασμα δεδομένων του πίνακα `users`
+--
+
+INSERT INTO `users` (`username`, `email`, `password`, `name`, `surname`, `study`) VALUES
+('mike', 'm.efthimis4@gmail.com', '$2y$10$II98ydlhWe2nk7ghwMNPGuYnnlMfw2lhQBMvQk9EjAOmOiVU0pD0.', 'Ευθύμιος', 'Κελέσμητος', 'Μηχανικων Πληροφορικής'),
+('vasal', 'yolo@gmail.com', '$2y$10$JMZEv8hz7L9vIqRotgAHROfBqZupo5ajyS1/E.dkVvyn/XIqqlju2', 'Βασίλης ', 'Ιωαννίδης', 'Μηχανικων Πληροφορικής');
+
+--
+-- Ευρετήρια για άχρηστους πίνακες
+--
+
+--
+-- Ευρετήρια για πίνακα `board`
+--
+ALTER TABLE `board`
+  ADD PRIMARY KEY (`x`,`y`);
+
+--
+-- Ευρετήρια για πίνακα `board_empty`
+--
+ALTER TABLE `board_empty`
+  ADD PRIMARY KEY (`x`,`y`);
+
+--
+-- Ευρετήρια για πίνακα `players`
+--
+ALTER TABLE `players`
+  ADD PRIMARY KEY (`color`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

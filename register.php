@@ -13,10 +13,9 @@
 <body>
 <div class="container">
     
-      <!--  <div class="logo">
-            <img src="img/big-logo.png" alt="">
-        </div>   -->
-
+        <div class="logo">
+            <img src="img/logo.png" alt="" style="border-radius: 15px; width:250px">
+        </div>   
         <div class="form-container">
             <h2>Εγγραφή</h2>
             <form method="post">

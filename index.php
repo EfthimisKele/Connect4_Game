@@ -28,13 +28,16 @@ html, body {
 
 .container{
   display: flex;
+  flex-direction: col;
   justify-content: center;
+  align-items:center ;
 }
 
 #header{
   height:80px;
   line-height:80px;
   margin:0;
+  display: flex;
   padding-left:10px;
 }
 
@@ -97,10 +100,10 @@ table {
     echo '<a href="logout.php">' .
         '<i class="sign_out"></i>' .  
         'Αποσύνδεση</a>';
-} 
+  } 
   ?>
   </div>
-  <div id=names>
+  <div id="names">
     <h1>YOLOOO</h1><br>
     <h2>DF</h2>
   </div>

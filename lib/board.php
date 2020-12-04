@@ -1,11 +1,16 @@
+
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', TRUE);
+
 
 function show_board() {
 	
-	global $mysqli;
+	global $conn;
+	$conn = dbconnect();
 	
 	$sql = 'select * from board';
-	$st = $mysqli->prepare($sql);
+	$st = $conn->prepare($sql);
 
 	$st->execute();
 	$res = $st->get_result();
@@ -16,10 +21,11 @@ function show_board() {
 }
 
 function reset_board() {
-	global $mysqli;
+	global $conn;
+	$conn = dbconnect();
 	
 	$sql = 'call clean_board()';
-	$mysqli->query($sql);
+	$conn->query($sql);
 	show_board();
 }
 ?>

@@ -2,9 +2,10 @@
 
 function show_status() {
 	
-	global $mysqli;
+	global $conn;
+	$conn = dbconnect();
 	$sql = 'select * from game_status';
-	$st = $mysqli->prepare($sql);
+	$st = $conn->prepare($sql);
 
 	$st->execute();
 	$res = $st->get_result();

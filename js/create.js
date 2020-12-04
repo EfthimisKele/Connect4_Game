@@ -1,3 +1,8 @@
+$(function(){
+     draw_board();
+});
+
+
 function draw_board() {
     var t = '<table id="table">';
     for(var i=1;i<7;i++) {
@@ -9,4 +14,4 @@ function draw_board() {
     }
     t+='</table>';
     $('#game').html(t);
-}
+} 

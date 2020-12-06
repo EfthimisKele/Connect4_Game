@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Φιλοξενητής: 127.0.0.1
--- Χρόνος δημιουργίας: 24 Νοε 2020 στις 10:47:31
+-- Χρόνος δημιουργίας: 06 Δεκ 2020 στις 11:44:19
 -- Έκδοση διακομιστή: 10.4.11-MariaDB
 -- Έκδοση PHP: 7.4.5
 
@@ -182,7 +182,9 @@ DELIMITER ;
 
 CREATE TABLE `players` (
   `username` varchar(20) DEFAULT NULL,
-  `color` enum('R','Y') NOT NULL
+  `piece_color` enum('R','Y') NOT NULL,
+  `token` varchar(100) DEFAULT NULL,
+  `last_action` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -206,7 +208,10 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`username`, `email`, `password`, `name`, `surname`, `study`) VALUES
 ('mike', 'm.efthimis4@gmail.com', '$2y$10$II98ydlhWe2nk7ghwMNPGuYnnlMfw2lhQBMvQk9EjAOmOiVU0pD0.', 'Ευθύμιος', 'Κελέσμητος', 'Μηχανικων Πληροφορικής'),
-('vasal', 'yolo@gmail.com', '$2y$10$JMZEv8hz7L9vIqRotgAHROfBqZupo5ajyS1/E.dkVvyn/XIqqlju2', 'Βασίλης ', 'Ιωαννίδης', 'Μηχανικων Πληροφορικής');
+('vasal', 'yolo@gmail.com', '$2y$10$JMZEv8hz7L9vIqRotgAHROfBqZupo5ajyS1/E.dkVvyn/XIqqlju2', 'Βασίλης ', 'Ιωαννίδης', 'Μηχανικων Πληροφορικής'),
+('nik', 'it154465@it.teithe.gr', '$2y$10$XTtwEWggN1arzTiOKHLg8eTwOd/EUBLkjxHGUTavmb1iHfnxTgyN6', 'Νικος', 'Κελέσμητος', 'Παμακ'),
+('yolo', 'it154465@it.teithe.gr', '$2y$10$zFSmncqw4bRssuiLDjTAlei6cRWP5McuxN6jMZ7ABd3W4/hgdFA1e', 'Χρήστος', 'Κελέσμητος', 'Παμακ'),
+('yolo1', 'm.efthimis4@gmail.com', '$2y$10$YnX0xu0Bnl8BvBYP1zIM.eZl/OS6w9z4yyT.yxRcdM9OEOaVjBDiq', 'Νικος', 'Κελέσμητος', 'Παμακ');
 
 --
 -- Ευρετήρια για άχρηστους πίνακες
@@ -228,7 +233,7 @@ ALTER TABLE `board_empty`
 -- Ευρετήρια για πίνακα `players`
 --
 ALTER TABLE `players`
-  ADD PRIMARY KEY (`color`);
+  ADD PRIMARY KEY (`piece_color`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -26,6 +26,6 @@ function reset_board() {
 	
 	$sql = 'call clean_board()';
 	$conn->query($sql);
-	show_board();
+	//show_board();
 }
 ?>

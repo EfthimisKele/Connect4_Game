@@ -50,13 +50,6 @@ html, body {
   border-radius: 15px;
 }
 
-#names{
-  position: fixed;
-  left:0;
-  top:50%;
-  margin-top: 50%;
-}
-
 .sign_out{
   margin: 70px;
 }
@@ -101,12 +94,23 @@ table {
   } 
   ?>
   </div>
-  <div id="names">
-    <h1>YOLOOO</h1><br>
-    <h2>DF</h2>
-  </div>
   <div id="game">  
   </div>
+  <br/>
+<div id='game_initializer'>
+<input id='username'> 
+<select id='pcolor'>
+<option value='W'>W</option>
+<option value='B'>B</option>
+</select>
+<button id='chess_login' class='btn btn-primary'>ΕΙΣΟΔΟΣ ΣΤΟ ΠΑΙΧΝΙΔΙ</button><br>
+</div>
+<div id='game_info'>
+</div>
+<br/><br/>
+
+
+<button id='chess_reset' class='btn btn-primary'>ΕΝΑΡΞΗ/RESET</button><br>
   
 </div>
 

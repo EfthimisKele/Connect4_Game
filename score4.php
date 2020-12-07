@@ -3,6 +3,8 @@
 require_once "internal/database.php";
 require_once "lib/board.php";
 require_once "lib/game.php";
+require_once "lib/users.php";
+
 
 
 $method = $_SERVER['REQUEST_METHOD'];
@@ -17,9 +19,7 @@ switch ($r=array_shift($request)) {
                                 case null: handle_board($method);
                                                 break;
                                 case 'piece': handle_piece($method, $request[0],$request[1],$input);
-                                                break;
-                                
-                                            
+                                                break;             
                                 default: header("HTTP/1.1 404 Not Found");
                                                 break;
          }
@@ -49,7 +49,20 @@ function handle_piece($method, $x,$y,$input) {
 }
  
 function handle_player($method, $p,$input) {
-        ;
+
+        switch ($b=array_shift($request)) {
+		case '':
+		case null: if($method=='GET') {show_users($method);}
+				   else {header("HTTP/1.1 400 Bad Request"); 
+						 print json_encode(['errormesg'=>"Method $method not allowed here."]);}
+                    break;
+        case 'B': 
+		case 'W': handle_user($method, $b,$input);
+					break;
+		default: header("HTTP/1.1 404 Not Found");
+				 print json_encode(['errormesg'=>"Player $b not found."]);
+                 break;
+	}
 }
  
 ?>

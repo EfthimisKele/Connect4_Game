@@ -208,10 +208,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`username`, `email`, `password`, `name`, `surname`, `study`) VALUES
 ('mike', 'm.efthimis4@gmail.com', '$2y$10$II98ydlhWe2nk7ghwMNPGuYnnlMfw2lhQBMvQk9EjAOmOiVU0pD0.', 'Ευθύμιος', 'Κελέσμητος', 'Μηχανικων Πληροφορικής'),
-('vasal', 'yolo@gmail.com', '$2y$10$JMZEv8hz7L9vIqRotgAHROfBqZupo5ajyS1/E.dkVvyn/XIqqlju2', 'Βασίλης ', 'Ιωαννίδης', 'Μηχανικων Πληροφορικής'),
-('nik', 'it154465@it.teithe.gr', '$2y$10$XTtwEWggN1arzTiOKHLg8eTwOd/EUBLkjxHGUTavmb1iHfnxTgyN6', 'Νικος', 'Κελέσμητος', 'Παμακ'),
-('yolo', 'it154465@it.teithe.gr', '$2y$10$zFSmncqw4bRssuiLDjTAlei6cRWP5McuxN6jMZ7ABd3W4/hgdFA1e', 'Χρήστος', 'Κελέσμητος', 'Παμακ'),
-('yolo1', 'm.efthimis4@gmail.com', '$2y$10$YnX0xu0Bnl8BvBYP1zIM.eZl/OS6w9z4yyT.yxRcdM9OEOaVjBDiq', 'Νικος', 'Κελέσμητος', 'Παμακ');
+('vasal', 'yolo@gmail.com', '$2y$10$JMZEv8hz7L9vIqRotgAHROfBqZupo5ajyS1/E.dkVvyn/XIqqlju2', 'Βασίλης ', 'Ιωαννίδης', 'Μηχανικων Πληροφορικής');
 
 --
 -- Ευρετήρια για άχρηστους πίνακες

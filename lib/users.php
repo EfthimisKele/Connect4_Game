@@ -1,18 +1,20 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', TRUE);
 
 function show_users() {
-	global $mysqli;
+	global $conn;
 	$sql = 'select username,piece_color from players';
-	$st = $mysqli->prepare($sql);
+	$st = $conn->prepare($sql);
 	$st->execute();
 	$res = $st->get_result();
 	header('Content-type: application/json');
 	print json_encode($res->fetch_all(MYSQLI_ASSOC), JSON_PRETTY_PRINT);
 }
 function show_user($b) {
-	global $mysqli;
+	global $conn;
 	$sql = 'select username,piece_color from players where piece_color=?';
-	$st = $mysqli->prepare($sql);
+	$st = $conn->prepare($sql);
 	$st->bind_param('s',$b);
 	$st->execute();
 	$res = $st->get_result();
@@ -28,9 +30,9 @@ function set_user($b,$input) {
 		exit;
 	}
 	$username=$input['username'];
-	global $mysqli;
+	global $conn;
 	$sql = 'select count(*) as c from players where piece_color=? and username is not null';
-	$st = $mysqli->prepare($sql);
+	$st = $conn->prepare($sql);
 	$st->bind_param('s',$b);
 	$st->execute();
 	$res = $st->get_result();
@@ -41,7 +43,7 @@ function set_user($b,$input) {
 		exit;
 	}
 	$sql = 'update players set username=?, token=md5(CONCAT( ?, NOW()))  where piece_color=?';
-	$st2 = $mysqli->prepare($sql);
+	$st2 = $conn->prepare($sql);
 	$st2->bind_param('sss',$username,$username,$b);
 	$st2->execute();
 
@@ -49,7 +51,7 @@ function set_user($b,$input) {
 	
 	update_game_status();
 	$sql = 'select * from players where piece_color=?';
-	$st = $mysqli->prepare($sql);
+	$st = $conn->prepare($sql);
 	$st->bind_param('s',$b);
 	$st->execute();
 	$res = $st->get_result();

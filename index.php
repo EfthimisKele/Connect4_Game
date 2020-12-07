@@ -100,18 +100,15 @@ table {
 <div id='game_initializer'>
 <input id='username'> 
 <select id='pcolor'>
-<option value='W'>W</option>
-<option value='B'>B</option>
+ <option value='R'>R</option>
+ <option value='Y'>Y</option>
 </select>
 <button id='chess_login' class='btn btn-primary'>ΕΙΣΟΔΟΣ ΣΤΟ ΠΑΙΧΝΙΔΙ</button><br>
 </div>
 <div id='game_info'>
 </div>
 <br/><br/>
-
-
-<button id='chess_reset' class='btn btn-primary'>ΕΝΑΡΞΗ/RESET</button><br>
-  
+<button id='chess_reset' class='btn btn-primary'>ΕΝΑΡΞΗ/RESET</button><br>  
 </div>
 
    

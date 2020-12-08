@@ -3,16 +3,17 @@ var game_status={};
 
 
 $(function(){
-    draw_board();
+	draw_board();
+	fill_board();
 
     $('#chess_login').click( login_to_game);
     $('#chess_reset').click( reset_board);
-	$('#move_div').hide();
+	//$('#move_div').hide();
 	game_status_update();
 
 });
 
-
+//δημιουργία πίνακα
 function draw_board() {
     var t = '<table id="table">';
     for(var i=1;i<7;i++) {
@@ -26,18 +27,26 @@ function draw_board() {
     $('#game').html(t);
 } 
 
+//γέμισε τον πίνακα με τα δεδομένα από το API
 function fill_board() {
 	$.ajax({url: "score4.php/board/", success: fill_board_by_data });
 }
 
+//κάνε reset τον πίνακα από τα δεδομένα από το API
 function reset_board() {
 	$.ajax({url: "score4.php/board/", method: 'POST',  success: fill_board_by_data });
-	$('#move_div').hide();
+	//$('#move_div').hide();
 	$('#game_initializer').show(2000);
 }
 
+
+//κάνε του πίνακα τα td όλα κανονικά ξανά δηλάδη άσπρα 
 function fill_board_by_data(data) {
-	draw_board();
+	for(var i=0; i<data.length;i++){
+		var o =data[i];
+		var id = '#circle_'+ o.x + '_' + o.y;
+		$(id).addClass('score_circle').html();		
+	}
 }
 
 

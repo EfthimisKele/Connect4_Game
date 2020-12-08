@@ -19,6 +19,7 @@ function show_status() {
 	print json_encode($res->fetch_all(MYSQLI_ASSOC), JSON_PRETTY_PRINT);
 
 }
+
 function check_abort() {
 	global $conn;
 	

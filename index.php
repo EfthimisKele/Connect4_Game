@@ -55,8 +55,8 @@ html, body {
 }
 
 td.score_circle { 
+    background-color: #FFF;
     padding: 8px;
-    background: #E8ECE0;
     text-align: center;
     border: 1px solid #444;
     border-bottom-width: 0px;
@@ -70,13 +70,14 @@ td.score_circle {
     border-bottom-width: 4px;
 }
 
+
 table { 
     border-spacing: 0; 
     border: 0; 
     margin:3px; 
     padding:20px
 }
- 
+
  
 </style>    
 </head>

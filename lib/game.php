@@ -22,6 +22,7 @@ function show_status() {
 
 function check_abort() {
 	global $conn;
+	$conn = dbconnect();
 	
 	$sql = "update game_status set status='aborded', result=if(p_turn='R','Y','R'),p_turn=null where p_turn is not null and last_change<(now()-INTERVAL 5 MINUTE) and status='started'";
 	$st = $conn->prepare($sql);
@@ -31,6 +32,7 @@ function check_abort() {
 
 function update_game_status() {
 	global $conn;
+	$conn = dbconnect();
 	
 	$sql = 'select * from game_status';
 	$st = $conn->prepare($sql);

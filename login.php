@@ -17,7 +17,7 @@
         <div class="form-container">
             <h1>ΚΑΛΩΣ ΟΡΙΣΑΤΕ ΣΤΟ ΠΑΙΧΝΙΔΙ ΣΚΟΡ4 !!</h1>
             <div class="logo">
-            <img src="img/logo.png" alt="" style="border-radius: 15px; width:250px">
+            <img src="img/logo2.jpg" alt="" style="border-radius: 15px; width:300px">
             </div> 
             <h2>Σύνδεση</h2>
             <form method="post">

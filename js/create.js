@@ -1,6 +1,8 @@
-var me={};
+var me={token:null,piece_color:null};
 var game_status={};
-
+var board={};
+var last_update=new Date().getTime();
+var timer=null;
 
 $(function(){
 	draw_board();
@@ -8,7 +10,6 @@ $(function(){
 
     $('#chess_login').click( login_to_game);
     $('#chess_reset').click( reset_board);
-	//$('#move_div').hide();
 	game_status_update();
 
 });
@@ -35,7 +36,6 @@ function fill_board() {
 //κάνε reset τον πίνακα από τα δεδομένα από το API
 function reset_board() {
 	$.ajax({url: "score4.php/board/", method: 'POST',  success: fill_board_by_data });
-	//$('#move_div').hide();
 	$('#game_initializer').show(2000);
 }
 
@@ -62,6 +62,7 @@ function login_to_game() {
 	$.ajax({url: "score4.php/players/"+p_color, 
 			method: 'PUT',
 			dataType: "json",
+			headers: {"X-Token": me.token},
 			contentType: 'application/json',
 			data: JSON.stringify( {username: $('#username').val(), piece_color: p_color}),
 			success: login_result,
@@ -91,11 +92,9 @@ function update_status(data) {
 	if(game_status.p_turn==me.piece_color &&  me.piece_color!=null) {
 		x=0;
 		// do play
-		$('#move_div').show(1000);
 		setTimeout(function() { game_status_update();}, 15000);
 	} else {
 		// must wait for something
-		$('#move_div').hide(1000);
 		setTimeout(function() { game_status_update();}, 4000);
 	}
  	

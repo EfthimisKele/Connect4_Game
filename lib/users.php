@@ -1,9 +1,8 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', TRUE);
 
 function show_users() {
 	global $conn;
+	$conn = dbconnect();
 	$sql = 'select username,piece_color from players';
 	$st = $conn->prepare($sql);
 	$st->execute();
@@ -13,6 +12,7 @@ function show_users() {
 }
 function show_user($b) {
 	global $conn;
+	$conn = dbconnect();
 	$sql = 'select username,piece_color from players where piece_color=?';
 	$st = $conn->prepare($sql);
 	$st->bind_param('s',$b);
@@ -31,6 +31,7 @@ function set_user($b,$input) {
 	}
 	$username=$input['username'];
 	global $conn;
+	$conn = dbconnect();
 	$sql = 'select count(*) as c from players where piece_color=? and username is not null';
 	$st = $conn->prepare($sql);
 	$st->bind_param('s',$b);
@@ -69,7 +70,21 @@ function handle_user($method, $b,$input) {
     }
 }
 
-
+function current_color($token) {
+	
+	global $conn;
+	$conn = dbconnect();
+	if($token==null) {return(null);}
+	$sql = 'select * from players where token=?';
+	$st = $conn->prepare($sql);
+	$st->bind_param('s',$token);
+	$st->execute();
+	$res = $st->get_result();
+	if($row=$res->fetch_assoc()) {
+		return($row['piece_color']);
+	}
+	return(null);
+}
 
 
 ?>

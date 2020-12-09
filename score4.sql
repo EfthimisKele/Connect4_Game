@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Φιλοξενητής: 127.0.0.1
--- Χρόνος δημιουργίας: 06 Δεκ 2020 στις 11:44:19
+-- Χρόνος δημιουργίας: 09 Δεκ 2020 στις 21:33:02
 -- Έκδοση διακομιστή: 10.4.11-MariaDB
 -- Έκδοση PHP: 7.4.5
 
@@ -187,6 +187,14 @@ CREATE TABLE `players` (
   `last_action` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Άδειασμα δεδομένων του πίνακα `players`
+--
+
+INSERT INTO `players` (`username`, `piece_color`, `token`, `last_action`) VALUES
+(NULL, 'R', NULL, NULL),
+(NULL, 'Y', NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -208,7 +216,11 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`username`, `email`, `password`, `name`, `surname`, `study`) VALUES
 ('mike', 'm.efthimis4@gmail.com', '$2y$10$II98ydlhWe2nk7ghwMNPGuYnnlMfw2lhQBMvQk9EjAOmOiVU0pD0.', 'Ευθύμιος', 'Κελέσμητος', 'Μηχανικων Πληροφορικής'),
-('vasal', 'yolo@gmail.com', '$2y$10$JMZEv8hz7L9vIqRotgAHROfBqZupo5ajyS1/E.dkVvyn/XIqqlju2', 'Βασίλης ', 'Ιωαννίδης', 'Μηχανικων Πληροφορικής');
+('vasal', 'yolo@gmail.com', '$2y$10$JMZEv8hz7L9vIqRotgAHROfBqZupo5ajyS1/E.dkVvyn/XIqqlju2', 'Βασίλης ', 'Ιωαννίδης', 'Μηχανικων Πληροφορικής'),
+('nik', 'it154465@it.teithe.gr', '$2y$10$XTtwEWggN1arzTiOKHLg8eTwOd/EUBLkjxHGUTavmb1iHfnxTgyN6', 'Νικος', 'Κελέσμητος', 'Παμακ'),
+('yolo', 'it154465@it.teithe.gr', '$2y$10$zFSmncqw4bRssuiLDjTAlei6cRWP5McuxN6jMZ7ABd3W4/hgdFA1e', 'Χρήστος', 'Κελέσμητος', 'Παμακ'),
+('yolo1', 'm.efthimis4@gmail.com', '$2y$10$YnX0xu0Bnl8BvBYP1zIM.eZl/OS6w9z4yyT.yxRcdM9OEOaVjBDiq', 'Νικος', 'Κελέσμητος', 'Παμακ'),
+('alier', '123@gmail.com', '$2y$10$kliiamVxgi4e7eB3Vhwz0.xC9wxy2j3JhMGL7unywb60BT39WleCa', 'Ευθύμιος', 'Κελέσμητος', 'Μηχανικων Πληροφορικής');
 
 --
 -- Ευρετήρια για άχρηστους πίνακες

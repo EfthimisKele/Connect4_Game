@@ -7,9 +7,10 @@ var timer=null;
 $(function(){
 	draw_board();
 	fill_board();
-
-    $('#chess_login').click( login_to_game);
-    $('#chess_reset').click( reset_board);
+    $('#score4_login').click( login_to_game);
+	$('#score4_reset').click( reset_board);
+	$('#do_move').click( do_move);
+	$('#move_div').hide();
 	game_status_update();
 
 });
@@ -30,22 +31,30 @@ function draw_board() {
 
 //γέμισε τον πίνακα με τα δεδομένα από το API
 function fill_board() {
-	$.ajax({url: "score4.php/board/", success: fill_board_by_data });
+	$.ajax({url: "score4.php/board/",headers: {"X-Token": me.token}, success: fill_board_by_data });
 }
 
 //κάνε reset τον πίνακα από τα δεδομένα από το API
 function reset_board() {
-	$.ajax({url: "score4.php/board/", method: 'POST',  success: fill_board_by_data });
+	$.ajax({url: "score4.php/board/", headers: {"X-Token": me.token}, method: 'POST',  success: fill_board_by_data });
+	$('#move_div').hide();
 	$('#game_initializer').show(2000);
 }
 
 
-//κάνε του πίνακα τα td όλα κανονικά ξανά δηλάδη άσπρα 
+//κάνε του πίνακα τα td 
 function fill_board_by_data(data) {
 	for(var i=0; i<data.length;i++){
 		var o =data[i];
 		var id = '#circle_'+ o.x + '_' + o.y;
-		$(id).addClass('score_circle').html();		
+		var c = (o.color!=null)?o.color:'';
+		if (c=='R'){
+			$(id).addClass('score_circle_R').html();
+		}else if (c=='Y'){
+			$(id).addClass('score_circle_Y').html();
+		}else{
+			$(id).addClass('score_circle').html();
+		}	
 	}
 }
 
@@ -83,18 +92,27 @@ function login_error(data,y,z,c) {
 
 
 function game_status_update() {
-	$.ajax({url: "score4.php/status/", success: update_status });
+	clearTimeout(timer);
+	$.ajax({url: "score4.php/status/", success: update_status,headers: {"X-Token": me.token} });
 }
 
 function update_status(data) {
+	last_update=new Date().getTime();
+	var game_stat_old = game_status;
 	game_status=data[0];
 	update_info();
+	clearTimeout(timer);
 	if(game_status.p_turn==me.piece_color &&  me.piece_color!=null) {
 		x=0;
 		// do play
+		if(game_stat_old.p_turn!=game_status.p_turn) {
+			fill_board();
+		}
+		$('#move_div').show(1000);
 		setTimeout(function() { game_status_update();}, 15000);
 	} else {
 		// must wait for something
+		$('#move_div').hide(1000);
 		setTimeout(function() { game_status_update();}, 4000);
 	}
  	
@@ -105,6 +123,25 @@ function update_info(){
 	
 }
 
-function move_result(data){
+function do_move() {
+	var s = $('#the_move').val();
 	
+	var a = s.trim().split(/[ ]+/);
+	if(a.length!=2) {
+		alert('Must give 2 numbers');
+		return;
+	}
+	$.ajax({url: "score4.php/board/piece/"+a[0]+'/'+a[1], 
+			method: 'PUT',
+			dataType: "json",
+			contentType: 'application/json',
+			data: JSON.stringify( {x: a[0], y: a[1]}),
+			headers: {"X-Token": me.token},
+			success: move_result,
+			error: login_error});	
+}
+
+function move_result(data){
+	game_status_update();
+	fill_board_by_data(data);	
 }

@@ -5,16 +5,12 @@ ini_set('display_errors', TRUE);
 function show_status() {
 	
 	global $conn;
-
 	check_abort();
-
 	$conn = dbconnect();
 	$sql = 'select * from game_status';
 	$st = $conn->prepare($sql);
-
 	$st->execute();
 	$res = $st->get_result();
-
 	header('Content-type: application/json');
 	print json_encode($res->fetch_all(MYSQLI_ASSOC), JSON_PRETTY_PRINT);
 
@@ -22,21 +18,28 @@ function show_status() {
 
 function check_abort() {
 	global $conn;
-	$conn = dbconnect();
-	
+	$conn = dbconnect();	
 	$sql = "update game_status set status='aborded', result=if(p_turn='R','Y','R'),p_turn=null where p_turn is not null and last_change<(now()-INTERVAL 5 MINUTE) and status='started'";
 	$st = $conn->prepare($sql);
 	$r = $st->execute();
 }
 
+function read_status() {
+	global $conn;
+	$conn = dbconnect();
+	$sql = 'select * from game_status';
+	$st = $conn->prepare($sql);
+	$st->execute();
+	$res = $st->get_result();
+	$status = $res->fetch_assoc();
+	return($status);
+}
 
 function update_game_status() {
 	global $conn;
-	$conn = dbconnect();
-	
+	$conn = dbconnect();	
 	$sql = 'select * from game_status';
 	$st = $conn->prepare($sql);
-
 	$st->execute();
 	$res = $st->get_result();
 	$status = $res->fetch_assoc();
@@ -54,7 +57,7 @@ function update_game_status() {
 		$st2 = $conn->prepare($sql);
 		$st2->execute();
 		if($status['status']=='started') {
-			$new_status='aborted';
+			$new_status='aborded';
 		}
 	}
 
@@ -71,7 +74,7 @@ function update_game_status() {
 		case 1: $new_status='initialized'; break;
 		case 2: $new_status='started'; 
 				if($status['p_turn']==null) {
-					$new_turn='Y'; // It was not started before...
+					$new_turn='R'; // It was not started before...
 				}
 				break;
 	}
@@ -79,11 +82,6 @@ function update_game_status() {
 	$sql = 'update game_status set status=?, p_turn=?';
 	$st = $conn->prepare($sql);
 	$st->bind_param('ss',$new_status,$new_turn);
-	$st->execute();
-	
-	
-	
+	$st->execute();	
 }
-
-
 ?>

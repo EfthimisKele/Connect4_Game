@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Φιλοξενητής: 127.0.0.1
--- Χρόνος δημιουργίας: 09 Δεκ 2020 στις 21:33:02
+-- Χρόνος δημιουργίας: 27 Δεκ 2020 στις 11:25:48
 -- Έκδοση διακομιστή: 10.4.11-MariaDB
 -- Έκδοση PHP: 7.4.5
 
@@ -27,6 +27,21 @@ DELIMITER $$
 --
 CREATE DEFINER=`root`@`localhost` PROCEDURE `clean_board` ()  BEGIN 
 	 REPLACE INTO board SELECT * FROM board_empty;
+     UPDATE `players` SET username=NULL, token=NULL;
+     UPDATE `game_status` SET `status`='not active', `p_turn`=NULL, `result`=NULL;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `move_piece` (`x1` TINYINT, `y1` TINYINT)  BEGIN
+	 DECLARE c1 CHAR;
+     
+     SELECT p_turn INTO c1 
+     FROM game_status;
+	
+	 UPDATE board
+     SET color=c1
+     WHERE x=x1 AND y=y1;
+     
+     UPDATE game_status SET p_turn=IF(c1='R','Y','R');
 END$$
 
 DELIMITER ;
@@ -165,6 +180,13 @@ CREATE TABLE `game_status` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
+-- Άδειασμα δεδομένων του πίνακα `game_status`
+--
+
+INSERT INTO `game_status` (`status`, `p_turn`, `result`, `last_change`) VALUES
+('not active', NULL, NULL, '2020-12-27 10:25:21');
+
+--
 -- Δείκτες `game_status`
 --
 DELIMITER $$
@@ -216,11 +238,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`username`, `email`, `password`, `name`, `surname`, `study`) VALUES
 ('mike', 'm.efthimis4@gmail.com', '$2y$10$II98ydlhWe2nk7ghwMNPGuYnnlMfw2lhQBMvQk9EjAOmOiVU0pD0.', 'Ευθύμιος', 'Κελέσμητος', 'Μηχανικων Πληροφορικής'),
-('vasal', 'yolo@gmail.com', '$2y$10$JMZEv8hz7L9vIqRotgAHROfBqZupo5ajyS1/E.dkVvyn/XIqqlju2', 'Βασίλης ', 'Ιωαννίδης', 'Μηχανικων Πληροφορικής'),
-('nik', 'it154465@it.teithe.gr', '$2y$10$XTtwEWggN1arzTiOKHLg8eTwOd/EUBLkjxHGUTavmb1iHfnxTgyN6', 'Νικος', 'Κελέσμητος', 'Παμακ'),
-('yolo', 'it154465@it.teithe.gr', '$2y$10$zFSmncqw4bRssuiLDjTAlei6cRWP5McuxN6jMZ7ABd3W4/hgdFA1e', 'Χρήστος', 'Κελέσμητος', 'Παμακ'),
-('yolo1', 'm.efthimis4@gmail.com', '$2y$10$YnX0xu0Bnl8BvBYP1zIM.eZl/OS6w9z4yyT.yxRcdM9OEOaVjBDiq', 'Νικος', 'Κελέσμητος', 'Παμακ'),
-('alier', '123@gmail.com', '$2y$10$kliiamVxgi4e7eB3Vhwz0.xC9wxy2j3JhMGL7unywb60BT39WleCa', 'Ευθύμιος', 'Κελέσμητος', 'Μηχανικων Πληροφορικής');
+('vasal', 'yolo@gmail.com', '$2y$10$JMZEv8hz7L9vIqRotgAHROfBqZupo5ajyS1/E.dkVvyn/XIqqlju2', 'Βασίλης ', 'Ιωαννίδης', 'Μηχανικων Πληροφορικής');
 
 --
 -- Ευρετήρια για άχρηστους πίνακες

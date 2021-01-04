@@ -7,15 +7,13 @@
     
 
     function dbconnect() {
-    require_once "config_local.php";
-    $host = 'localhost';
-    $db = 'score4';
-    $user=$DB_USER;
-    $pass=$DB_PASS;
+        $host = 'localhost';
+        $user = 'root';
+        $password = '';
+        $database = 'score4';
+        $errors = array();
 
-    $errors = array();
-
-    
+/*   
 if(gethostname()=='users.iee.ihu.gr') {
     $conn = new mysqli($host, $user, $pass, $db,null,'/home/student/it/2015/it154465/mysql/run/mysql.sock');
     mysqli_set_charset($conn,"utf8");
@@ -31,13 +29,13 @@ if ($conn->connect_errno) {
     $mysqli->connect_errno . ") " . $conn->connect_error;
 }
 return $conn;
+} */
 
+    $conn = new mysqli($host, $user, $password, $database);
+    mysqli_set_charset($conn,"utf8");
+    if ($conn->connect_error) die("Η σύνδεση απέτυχε: " . $conn->connect_error);
+    return $conn;
     }
-   // $conn = new mysqli($host, $user, $password, $database);
-   // mysqli_set_charset($conn,"utf8");
-   // if ($conn->connect_error) die("Η σύνδεση απέτυχε: " . $conn->connect_error);
-  //  return $conn;
-  //  }
 
 
     function register(){

@@ -7,10 +7,8 @@
     
 
     function dbconnect() {
-    require_once ".git/db_upass.php";
+    require_once "config_local.php";
     $host = 'localhost';
-   //$user = 'root';
-    //$password = '';
     $db = 'score4';
     $user=$DB_USER;
     $pass=$DB_PASS;
@@ -22,6 +20,8 @@ if(gethostname()=='users.iee.ihu.gr') {
     $conn = new mysqli($host, $user, $pass, $db,null,'/home/student/it/2015/it154465/mysql/run/mysql.sock');
     mysqli_set_charset($conn,"utf8");
 } else {
+        $user='root';
+        $pass='';
         $conn = new mysqli($host, $user, $pass, $db);
         mysqli_set_charset($conn,"utf8");
 }

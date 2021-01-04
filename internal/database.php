@@ -7,7 +7,7 @@
     
 
     function dbconnect() {
-    require_once "db_upass.php";
+    require_once ".git/db_upass.php";
     $host = 'localhost';
    //$user = 'root';
     //$password = '';
